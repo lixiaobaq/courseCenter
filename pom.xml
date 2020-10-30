@@ -11,7 +11,7 @@
     <groupId>com.iothings</groupId>
     <artifactId>courseCenter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo</name>
+    <name>courseCenter</name>
     <description>课程中心管理系统</description>
 
     <properties>
