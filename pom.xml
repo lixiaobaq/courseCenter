@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.iothings</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>courseCenter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>demo</name>
-    <description>Demo project for Spring Boot</description>
+    <description>课程中心管理系统</description>
 
     <properties>
         <java.version>1.8</java.version>
