@@ -27,6 +27,9 @@ public class CourseFrame {
     private Integer level;
     private Integer parentid;
     private Integer status;
+
+
+    
     @Transient
     private Integer coursenum;
 
