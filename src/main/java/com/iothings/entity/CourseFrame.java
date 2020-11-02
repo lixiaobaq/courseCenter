@@ -10,13 +10,6 @@ import javax.persistence.*;
  * @Description：课程分类
  */
 @Entity
-@NamedNativeQueries(value = {
-        @NamedNativeQuery(
-                name="courseFrameById",
-                query="select * from course_frame where parentid = ?",
-                resultSetMapping = "courseFrameLsit"
-        )
-})
 @Table(name = "course_frame")
 @Data
 public class CourseFrame {

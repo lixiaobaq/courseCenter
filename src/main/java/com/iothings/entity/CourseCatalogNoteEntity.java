@@ -15,6 +15,6 @@ public class CourseCatalogNoteEntity {
     private Long courseCatalogId;
     private String startTime;
     private String endTime;
-    private String from;
-    private String to;
+    private String fromOf;
+    private String toOf;
 }
