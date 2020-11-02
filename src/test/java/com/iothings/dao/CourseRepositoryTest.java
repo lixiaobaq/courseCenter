@@ -1,5 +1,6 @@
 package com.iothings.dao;
 
+import com.iothings.entity.CourseCatalogEntity;
 import com.iothings.entity.CourseEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,10 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 public class CourseRepositoryTest {
 
-
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private CourseCatalogRepository courseCatalogRepository;
 
     @Test
     @Transactional
@@ -26,5 +28,21 @@ public class CourseRepositoryTest {
         courseEntity.setSubTitle("这是一本工业互333联的书");
         courseEntity.setSummary("简介999999");
         courseRepository.save(courseEntity);
+    }
+
+    @Test
+    @Transactional
+    public void saveCourseModel(){
+        CourseCatalogEntity c = new CourseCatalogEntity();
+        c.setCourseId(1l);
+        c.setLevelOf(1l);
+        c.setIndexOf(1l);
+        c.setParentId(1l);
+        c.setIcon("copy");
+        c.setTitle("测试版本");
+        c.setType("0");
+        c.setResourceId(1l);
+        c.setTaskId(1l);
+        courseCatalogRepository.save(c);
     }
 }

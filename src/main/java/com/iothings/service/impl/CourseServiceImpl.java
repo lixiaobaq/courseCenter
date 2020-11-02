@@ -2,5 +2,7 @@ package com.iothings.service.impl;
 
 //import com.iothings.service.CourseService;
 
-public class CourseServiceImpl {
+import com.iothings.service.CourseService;
+
+public class CourseServiceImpl implements CourseService {
 }

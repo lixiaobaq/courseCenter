@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -21,6 +22,24 @@ public class CourseEntity {
     private Long id;
     private String tilte;
     private String subTitle;
+    private String introduction;
+    private Long frameId;
+    private Long createrId;
+    //封面
+    private String titlePageUrls;
+    //0免费 1收费
+    private String fee;
+    //评分1-5
+    private String score;
+    //评分人次
+    private Long scoreCounts;
+    //学习人次
+    private Long learnCounts;
+    //原价
+    private BigDecimal price;
+    //现价
+    private BigDecimal currentPrice;
+    //简介 富文本
     private String summary;
     @Column(updatable = false)
     @CreationTimestamp
