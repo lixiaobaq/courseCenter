@@ -9,9 +9,5 @@ import java.util.List;
  */
 public interface CourseService {
 
-    CourseEntity findCourseById(Long courseId);
-
-    List<CourseEntity> findAll();
-
-    void deleteCouses(Long courseId);
+    List<CourseEntity> findAll(Integer paseSize, Integer pageNo, String keywords, String keywordType, Integer industry, Integer verifyStatus);
 }

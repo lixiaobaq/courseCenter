@@ -1,10 +1,21 @@
 package com.iothings.controller;
 
 import com.iothings.VO.HeadVO;
+import com.iothings.VO.ProductVO;
 import com.iothings.VO.ResultVO;
 import com.iothings.entity.CourseEntity;
 import com.iothings.entity.GraphicEntity;
-import org.springframework.web.bind.annotation.*;
+import com.iothings.service.impl.CourseServiceImpl;
+import com.iothings.util.ResultVOUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: GuoYan
@@ -12,18 +23,38 @@ import org.springframework.web.bind.annotation.*;
  * @Description：
  */
 @RestController
-@RequestMapping(name = "course")
+@RequestMapping(name = "/api/course")
+@Slf4j
 public class CourseController {
 
+    public ResultVOUtil resultVOUtil;
+
+    public CourseServiceImpl courseServiceImpl;
+
+    @GetMapping("list")
+    public ResultVO list(@RequestParam("paseSize") Integer paseSize,
+                         @RequestParam("pageNo") Integer pageNo,
+                         @RequestParam("keywords") String keywords,
+                         @RequestParam("keywordType") String keywordType,
+                         @RequestParam("industry") Integer industry,
+                         @RequestParam("verifyStatus") Integer verifyStatus,
+                         @RequestParam("style_id") Integer style_id) {
+        List<CourseEntity> course = courseServiceImpl.findAll(paseSize, pageNo, keywords, keywordType, industry, verifyStatus);
+        ProductVO productVO = new ProductVO();
+        productVO.setDataList(course);
+        ResultVO resultVO = resultVOUtil.success(productVO);
+        return resultVO;
+    }
+
     @GetMapping("head")
-    public ResultVO head(){
-        ResultVO resultVO=new ResultVO();
+    public ResultVO head() {
+        ResultVO resultVO = new ResultVO();
         resultVO.setCode(0);
         resultVO.setMsg("成功");
 
-        HeadVO headVO=new HeadVO();
+        HeadVO headVO = new HeadVO();
 
-        GraphicEntity graphicEntity=new GraphicEntity();
+        GraphicEntity graphicEntity = new GraphicEntity();
         graphicEntity.setId(1l);
         graphicEntity.setImageUrl("http://www.baidu.com");
         graphicEntity.setUrl("http://www.baidu.com");
@@ -36,120 +67,4 @@ public class CourseController {
 
     }
 
-    @PostMapping("createCouse")
-    public ResultVO createCouse(@RequestParam("course") CourseEntity course){
-        ResultVO resultVO=new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-
-        return resultVO;
-    }
-
-    @GetMapping("getCouseListBy")
-    public ResultVO getCouseListBy(){
-        ResultVO resultVO=new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-
-        return resultVO;
-    }
-
-    @GetMapping("getCouseInfo")
-    public ResultVO getCouseInfo(){
-        ResultVO resultVO=new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-
-        return resultVO;
-    }
-
-    @PostMapping("deleteCouses")
-    public ResultVO deleteCouses(){
-        ResultVO resultVO=new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-
-        return resultVO;
-    }
-
-    @PostMapping("submitCourse")
-    public ResultVO submitCourse(){
-        ResultVO resultVO=new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-
-        return resultVO;
-    }
-
-    @PostMapping("saveCouseCatalogTree")
-    public ResultVO saveCouseCatalogTree(){
-        ResultVO resultVO=new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-
-        return resultVO;
-    }
-
-    @PostMapping("inspectCourse")
-    public ResultVO inspectCourse(){
-        ResultVO resultVO=new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-
-        return resultVO;
-    }
-
-    @PostMapping("publishCourse")
-    public ResultVO publishCourse(){
-        ResultVO resultVO=new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-
-        return resultVO;
-    }
-
-    @PostMapping("playResource")
-    public ResultVO playResource(){
-        ResultVO resultVO=new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-
-        return resultVO;
-    }
-
-    @PostMapping("callTest")
-    public ResultVO callTest(){
-        ResultVO resultVO=new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-
-        return resultVO;
-    }
-
-    @PostMapping("uploadResource")
-    public ResultVO uploadResource(){
-        ResultVO resultVO=new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-
-        return resultVO;
-    }
-
-    @GetMapping("getResourceList")
-    public ResultVO getResourceList(){
-        ResultVO resultVO=new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-
-        return resultVO;
-    }
-
-    @PostMapping("deleteResources")
-    public ResultVO deleteResources(){
-        ResultVO resultVO=new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-
-        return resultVO;
-    }
 }
