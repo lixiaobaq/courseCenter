@@ -3,6 +3,7 @@ package com.iothings.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author: Alex
@@ -10,13 +11,6 @@ import javax.persistence.*;
  * @Description：课程分类
  */
 @Entity
-@NamedNativeQueries(value = {
-        @NamedNativeQuery(
-                name="courseFrameById",
-                query="select * from course_frame where parentid = ?",
-                resultSetMapping = "courseFrameLsit"
-        )
-})
 @Table(name = "course_frame")
 @Data
 public class CourseFrame {
@@ -24,16 +18,19 @@ public class CourseFrame {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String sort;
     private Integer level;
     private Integer parentid;
     private Integer status;
-
-
-    
+//    @OneToMany(targetEntity = CourseFrame.class)
+    @Transient
+    private List<CourseFrame> children;
     @Transient
     private Integer coursenum;
 
-    public CourseFrame(){}
+    public CourseFrame(){
+
+    }
 
     public void chanegParent(){}
 

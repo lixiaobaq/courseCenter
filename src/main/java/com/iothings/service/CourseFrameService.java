@@ -2,6 +2,8 @@ package com.iothings.service;
 
 import com.iothings.entity.CourseFrame;
 
+import java.util.List;
+
 /**
  * @author: Alex
  * @time:2020/10/29 10:29 PM
@@ -11,5 +13,7 @@ public interface CourseFrameService {
 
     CourseFrame save(CourseFrame courseClassify);
 
+    public List<CourseFrame> getTree(Integer status);
 
+    public List<CourseFrame> getTreeAndCourseCounts(Integer status);
 }

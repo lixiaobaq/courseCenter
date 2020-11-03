@@ -3,11 +3,8 @@ package com.iothings.dao;
 import com.iothings.entity.CourseFrame;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityResult;
-import javax.persistence.SqlResultSetMapping;
-import javax.persistence.SqlResultSetMappings;
 import java.util.List;
 
 
@@ -18,22 +15,20 @@ import java.util.List;
  */
 public interface CourseFrameRepository extends JpaRepository<CourseFrame,Long> {
 
-
     @Query(value = "SELECT * FROM course_frame WHERE id=?1",nativeQuery = true)
-//    @SqlResultSetMappings({
-//            @SqlResultSetMapping(name="studentInfo",entities=@EntityResult(entityClass=CourseFrame.class)),
-//    })
     List<CourseFrame> findByIdss(Long id);
 
     List<CourseFrame> findByParentid(Integer pid);
 
-    public static final String selectCourseFrameList = "SELECT * FROM course_frame WHERE id=?";
-    public static final String deleteStudentId = "delete from student_info where stu_id = ? ";
-    public static final String updateStudentId = " update student_inf set stu_name = ? where stu_id = ? ";
+    List<CourseFrame> findByStatus(Integer status);
 
-    public void selectCourseFrameList(EntityManager entitymanager, Integer id );
+    List<CourseFrame> findByParentidAndStatus(Integer parentid,Integer status);
 
-    public void deleteStudentById(EntityManager entitymanager, Integer id );
-
-    public void updateStudentById(EntityManager entitymanager, Integer id );
+    /**
+     * 获取课程分类下的所有课程数量
+     * @param id
+     * @return
+     */
+    @Query(value = "SELECT  COUNT(*) FROM `course` WHERE FIND_IN_SET( ?1, frame_id) ",nativeQuery = true)
+    Integer findCourseNumByFrame(Integer id);
 }
