@@ -25,9 +25,10 @@ public class CourseFrameRepositoryTest {
     public void saveTest(){
         CourseFrame courseFrame=new CourseFrame();
         courseFrame.setLevel(1);
-        courseFrame.setName("第四个课程分类");
-        courseFrame.setParentid(3);
+        courseFrame.setName("中文不好使？");
+        courseFrame.setParentid(0);
         courseFrame.setStatus(0);
+        courseFrame.setCoursenum(1);
         courseFrameRepository.save(courseFrame);
     }
     @Test
@@ -40,5 +41,17 @@ public class CourseFrameRepositoryTest {
         List<CourseFrame> courseFrame=courseFrameRepository.findByParentid(1);
         System.out.println("lieb:"+JSONObject.toJSONString(courseFrame));
         Assert.assertNotEquals(0,courseFrame.size());
+    }
+    @Test
+    public void findByStatus(){
+        List<CourseFrame> courseFrame=courseFrameRepository.findByStatus(0);
+        System.out.println("lieb:"+JSONObject.toJSONString(courseFrame));
+        Assert.assertNotEquals(0,courseFrame.size());
+    }
+
+    @Test
+    public void findCourseNumByFrame(){
+        Integer courseFrame=courseFrameRepository.findCourseNumByFrame(13);
+        System.out.println("lieb:"+courseFrame);
     }
 }
