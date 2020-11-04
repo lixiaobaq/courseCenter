@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface CourseRepository extends JpaRepository<CourseEntity,Long> {
 
-    @Query(value = "SELECT * FROM course WHERE LIMIT ?1,?2", nativeQuery=true)
+    @Query(value = "SELECT * FROM course LIMIT ?1,?2", nativeQuery=true)
     List<CourseEntity> findCourseEntityPageBean(Integer page, Integer pageNo);
 
 }

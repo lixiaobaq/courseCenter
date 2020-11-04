@@ -1,7 +1,6 @@
 package com.iothings.controller;
 
 import com.iothings.VO.HeadVO;
-import com.iothings.VO.ProductVO;
 import com.iothings.VO.ResultVO;
 import com.iothings.entity.CourseEntity;
 import com.iothings.entity.GraphicEntity;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,26 +22,23 @@ import java.util.List;
  * @Description：
  */
 @RestController
-@RequestMapping(name = "/api/course")
+@RequestMapping(name = "")
 @Slf4j
 public class CourseController {
 
-    public ResultVOUtil resultVOUtil;
+    @Autowired
+    private CourseServiceImpl courseServiceImpl;
 
-    public CourseServiceImpl courseServiceImpl;
-
-    @GetMapping("list")
+    @GetMapping("/api/course/list")
     public ResultVO list(@RequestParam("paseSize") Integer paseSize,
                          @RequestParam("pageNo") Integer pageNo,
-                         @RequestParam("keywords") String keywords,
-                         @RequestParam("keywordType") String keywordType,
-                         @RequestParam("industry") Integer industry,
-                         @RequestParam("verifyStatus") Integer verifyStatus,
-                         @RequestParam("style_id") Integer style_id) {
-        List<CourseEntity> course = courseServiceImpl.findAll(paseSize, pageNo, keywords, keywordType, industry, verifyStatus);
-        ProductVO productVO = new ProductVO();
-        productVO.setDataList(course);
-        ResultVO resultVO = resultVOUtil.success(productVO);
+                         @RequestParam(value = "keywords", required =  false) String keywords,
+                         @RequestParam(value = "keywordType", required =  false) String keywordType,
+                         @RequestParam(value = "industry", required =  false) Integer industry,
+                         @RequestParam(value = "verifyStatus", required =  false) Integer verifyStatus,
+                         @RequestParam(value = "style_id", required =  false) Integer style_id) {
+        List<CourseEntity> course = courseServiceImpl.findAll(paseSize, pageNo);
+        ResultVO resultVO = ResultVOUtil.success(Arrays.asList(course));
         return resultVO;
     }
 

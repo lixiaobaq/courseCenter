@@ -25,11 +25,11 @@ import java.util.List;
 public class CourseFrameController {
     @Autowired
     private CourseFrameServiceImpl courseFrameService;
-    @GetMapping("list")
-    public ResultVO list(){
-        CourseFrameVO courseFrameVO=new CourseFrameVO();
-        List<CourseFrame> courseFramelist=courseFrameService.getTree(CourseFrameType.DOWN_STATUS);
-        courseFrameVO.setList(courseFramelist);
-        return ResultVOUtil.success(Arrays.asList(courseFrameVO));
-    }
+//    @GetMapping("list")
+//    public ResultVO list(){
+//        CourseFrameVO courseFrameVO=new CourseFrameVO();
+//        List<CourseFrame> courseFramelist=courseFrameService.getTree(CourseFrameType.DOWN_STATUS);
+//        courseFrameVO.setList(courseFramelist);
+//        return ResultVOUtil.success(Arrays.asList(courseFrameVO));
+//    }
 }
