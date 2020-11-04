@@ -16,4 +16,6 @@ public interface CourseFrameService {
     public List<CourseFrame> getTree(Integer status);
 
     public List<CourseFrame> getTreeAndCourseCounts(Integer status);
+
+    public void delete(Integer id);
 }

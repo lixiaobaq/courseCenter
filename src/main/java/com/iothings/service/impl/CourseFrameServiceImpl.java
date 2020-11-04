@@ -25,6 +25,10 @@ public class CourseFrameServiceImpl implements CourseFrameService {
     public CourseFrame save(CourseFrame courseFrame) {
         return repository.save(courseFrame);
     }
+    @Override
+    public void delete(Integer id){
+        repository.deleteById(Long.valueOf(id));
+    }
 
     /**
      * 获取课程分类树
