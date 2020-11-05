@@ -4,15 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.iothings.VO.CourseFrameVO;
 import com.iothings.VO.ResultVO;
 import com.iothings.entity.CourseFrame;
-import com.iothings.enums.CourseFrameType;
-import com.iothings.form.CourseFrameForm;
+import com.iothings.enums.ResultEnum;
 import com.iothings.service.impl.CourseFrameServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import util.ResultVOUtil;
 
-import javax.swing.*;
-import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,8 +26,9 @@ public class CourseFrameController {
     @GetMapping("list")
     public ResultVO list(){
         CourseFrameVO courseFrameVO=new CourseFrameVO();
-        List<CourseFrame> courseFramelist=courseFrameService.getTree(CourseFrameType.DOWN_STATUS);
+        List<CourseFrame> courseFramelist=courseFrameService.getTree(ResultEnum.STATUS_TYPE_UP.getCode());
         courseFrameVO.setList(courseFramelist);
+        System.out.println(JSONObject.toJSONString(courseFrameVO));
         return ResultVOUtil.success(Arrays.asList(courseFrameVO));
     }
 
@@ -40,7 +38,7 @@ public class CourseFrameController {
         courseFrame.setName(name);
         courseFrame.setLevel(Integer.parseInt(Level));
         courseFrame.setParentid(Integer.parseInt(Parentid));
-        courseFrame.setStatus(CourseFrameType.DOWN_STATUS);
+        courseFrame.setStatus(ResultEnum.STATUS_TYPE_DOWN.getCode());
         courseFrame.setSort(Sort);
         CourseFrame CourseFrame2=courseFrameService.save(courseFrame);
         System.out.println(JSONObject.toJSONString(CourseFrame2));

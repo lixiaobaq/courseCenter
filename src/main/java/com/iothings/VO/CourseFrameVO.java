@@ -12,7 +12,7 @@ import java.util.List;
  * @Description：
  */
 @Data
-public class CourseFrameVO {
+public class CourseFrameVO<T> {
     /** */
     @JsonProperty("list")
     private List<CourseFrame> list;

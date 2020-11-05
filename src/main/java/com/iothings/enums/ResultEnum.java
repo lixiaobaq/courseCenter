@@ -9,7 +9,8 @@ import lombok.Getter;
  */
 @Getter
 public enum ResultEnum {
-
+    STATUS_TYPE_UP(1,"上架状态"),
+    STATUS_TYPE_DOWN(0,"下架状态"),
     PARAM_ERROR(1, "参数不正确"),
     TOKEN_NULL(2, "token为空"),
     TOKEN_INVALID(3, "token无效"),
