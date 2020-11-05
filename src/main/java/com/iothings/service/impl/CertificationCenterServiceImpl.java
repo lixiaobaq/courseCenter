@@ -23,6 +23,7 @@ public class CertificationCenterServiceImpl implements CertificationCenterServic
 
         @Autowired
         private CertificationCenterRepository certificationCenterRepository;
+
         @Override
         public List<CertificationCenterEntity> findPopularCertificates() {
                 List<CertificationCenterEntity> certificationCenterEntity = certificationCenterRepository.findCertificationCenterEntityBean();
