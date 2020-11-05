@@ -24,7 +24,7 @@ public class CourseRepositoryTest {
     public void saveTest(){
         CourseEntity courseEntity=new CourseEntity();
 
-        courseEntity.setTilte("工业互联网2223");
+        courseEntity.setTitle("工业互联网2223");
         courseEntity.setSubTitle("这是一本工业互333联的书");
         courseEntity.setSummary("简介999999");
         courseRepository.save(courseEntity);
