@@ -13,7 +13,7 @@ import java.util.Date;
 @Entity
 @Table(name = "course_publish")
 @Data
-public class CoursePublishEntity {
+public class CoursePublishEntity extends CourseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

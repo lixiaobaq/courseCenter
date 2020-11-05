@@ -8,8 +8,7 @@ public enum CourseKeywordTypeEnum {
     NAME("1", "名称"),
     ID("2", "id"),
     USER("3", "用戶"),
-    ORGAN("4", "机构"),
-    UNKNOWN("5", "未知");
+    ORGAN("4", "机构");
 
     CourseKeywordTypeEnum(String code, String message) {
         this.code = code;
@@ -21,10 +20,10 @@ public enum CourseKeywordTypeEnum {
 
     public static CourseKeywordTypeEnum getByType(String type){
         for (CourseKeywordTypeEnum constants : values()) {
-            if (constants.getMessage().equalsIgnoreCase(type)) {
+            if (constants.getCode().equalsIgnoreCase(type)) {
                 return constants;
             }
         }
-        return UNKNOWN;
+        return null;
     }
 }
