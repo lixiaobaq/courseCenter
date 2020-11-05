@@ -1,7 +1,6 @@
 package com.iothings.service;
 
-import com.iothings.entity.CourseEntity;
-import org.springframework.stereotype.Service;
+import com.iothings.entity.CoursePublishEntity;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
  */
 public interface CourseService {
 
-    List<CourseEntity> findAll(Integer paseSize, Integer pageNo, String keywords, String keywordType, Integer industry, Integer verifyStatus);
+    List<CoursePublishEntity> findAll(Integer paseSize, Integer pageNo, String keywords, String keywordType, Integer industry, Integer verifyStatus);
 
     Integer findCourseAllNumbers();
 }

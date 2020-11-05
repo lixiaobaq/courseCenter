@@ -2,6 +2,7 @@ package com.iothings.dao;
 
 import com.iothings.entity.CourseCatalogEntity;
 import com.iothings.entity.CourseEntity;
+import com.iothings.entity.CoursePublishEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class CourseRepositoryTest {
     @Test
     @Transactional
     public void saveTest(){
-        CourseEntity courseEntity=new CourseEntity();
+        CoursePublishEntity courseEntity=new CoursePublishEntity();
 
         courseEntity.setTitle("工业互联网2223");
         courseEntity.setSubTitle("这是一本工业互333联的书");
