@@ -12,7 +12,6 @@ import lombok.Data;
  */
 @Data
 public class ResultWebVO<T> {
-
     /** 错误码 */
     private Integer code;
     /** 提示信息 */

@@ -11,7 +11,6 @@ import com.iothings.VO.ResultWebVO;
  * @Description： Web端返回数据封装类
  */
 public class ResultWebVOUtil {
-
     public static ResultWebVO success(Object object) {
         ResultWebVO resultWebVO = new ResultWebVO();
         resultWebVO.setCode(0);
