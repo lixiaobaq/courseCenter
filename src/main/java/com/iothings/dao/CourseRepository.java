@@ -15,7 +15,9 @@ import java.util.List;
  */
 public interface CourseRepository extends JpaRepository<CourseEntity,Long> {
 
-    @Query(value = "SELECT * FROM course LIMIT ?1,?2", nativeQuery=true)
-    List<CourseEntity> findCourseEntityPageBean(Integer page, Integer pageNo);
+    @Query(value = "SELECT * FROM course WHERE CONCAT(title,sub_title) LIKE %?3% LIMIT ?2,?1", nativeQuery=true)
+    List<CourseEntity> findCourseEntityPageBean(Integer page, Integer pageNo, String keywords, Integer industry, Integer verifyStatus);
 
+    @Query(value = "SELECT COUNT(*) FROM course", nativeQuery=true)
+    Integer findCourseAllNumbers();
 }

@@ -1,9 +1,11 @@
 package com.iothings.controller;
 
 import com.iothings.VO.HeadVO;
+import com.iothings.VO.PageVO;
 import com.iothings.VO.ResultVO;
 import com.iothings.entity.CourseEntity;
 import com.iothings.entity.GraphicEntity;
+import com.iothings.enums.ResultEnum;
 import com.iothings.service.impl.CourseServiceImpl;
 import com.iothings.util.ResultVOUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -22,14 +25,14 @@ import java.util.List;
  * @Description：
  */
 @RestController
-@RequestMapping(name = "")
+@RequestMapping("/api/course")
 @Slf4j
 public class CourseController {
 
     @Autowired
     private CourseServiceImpl courseServiceImpl;
 
-    @GetMapping("/api/course/list")
+    @GetMapping("/list")
     public ResultVO list(@RequestParam("paseSize") Integer paseSize,
                          @RequestParam("pageNo") Integer pageNo,
                          @RequestParam(value = "keywords", required =  false) String keywords,
@@ -37,8 +40,20 @@ public class CourseController {
                          @RequestParam(value = "industry", required =  false) Integer industry,
                          @RequestParam(value = "verifyStatus", required =  false) Integer verifyStatus,
                          @RequestParam(value = "style_id", required =  false) Integer style_id) {
-        List<CourseEntity> course = courseServiceImpl.findAll(paseSize, pageNo);
-        ResultVO resultVO = ResultVOUtil.success(Arrays.asList(course));
+        ResultVO resultVO = new ResultVO();
+        try {
+            List<CourseEntity> course = courseServiceImpl.findAll(paseSize, pageNo, keywords, keywordType, industry, verifyStatus);
+            Integer total = courseServiceImpl.findCourseAllNumbers();
+            PageVO pageVO = new PageVO();
+            pageVO.setDataList(course);
+            pageVO.setPaseSize(paseSize);
+            pageVO.setPageNo(pageNo);
+            pageVO.setTotal(total);
+            resultVO = ResultVOUtil.success(pageVO);
+        }catch (Exception e){
+            e.printStackTrace();
+            resultVO = ResultVOUtil.error(ResultEnum.MANAGER_ERROR);
+        }
         return resultVO;
     }
 
