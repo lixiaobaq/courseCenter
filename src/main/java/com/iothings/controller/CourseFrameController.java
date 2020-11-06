@@ -21,7 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/style/")
 public class CourseFrameController {
-    
+
     @Autowired
     private CourseFrameServiceImpl courseFrameService;
     @GetMapping("list")
