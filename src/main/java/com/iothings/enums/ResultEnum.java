@@ -9,6 +9,12 @@ import lombok.Getter;
  */
 @Getter
 public enum ResultEnum {
+    ADD_SUCCES(1,"添加成功"),
+    ADD_ERROR(-1,"添加失败"),
+    EDIT_SUCCES(1,"修改成功"),
+    EDIT_ERROR(-1,"修改失败"),
+    DELETE_SUCCES(1,"删除成功"),
+    DELETE_ERROR(-1,"删除失败"),
     STATUS_TYPE_UP(1,"上架状态"),
     STATUS_TYPE_DOWN(0,"下架状态"),
     PARAM_ERROR(1, "参数不正确"),
