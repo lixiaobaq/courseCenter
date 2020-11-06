@@ -1,6 +1,7 @@
 package com.iothings.controller;
 
 import com.iothings.VO.ResultWebVO;
+import com.iothings.dto.CertificationCenterDTO;
 import com.iothings.entity.CertificationCenterEntity;
 import com.iothings.service.impl.CertificationCenterServiceImpl;
 import com.iothings.util.ResultWebVOUtil;
@@ -32,8 +33,14 @@ public class CertificationCenterController {
     public ResultWebVO list(){
         ResultWebVO resultWebVO = new ResultWebVO();
 
-        List<CertificationCenterEntity> list = certificationCenterServiceImpl.findPopularCertificates();
+        List<CertificationCenterDTO> list = certificationCenterServiceImpl.findPopularCertificates();
         resultWebVO = ResultWebVOUtil.success(list);
         return resultWebVO;
     }
+
+
+    //** Admin Start
+
+
+    //** Admin End
 }

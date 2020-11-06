@@ -2,6 +2,7 @@ package com.iothings.service.impl;
 
 import com.iothings.dao.CertificationCenterRepository;
 import com.iothings.dao.CourseRepository;
+import com.iothings.dto.CertificationCenterDTO;
 import com.iothings.entity.CertificationCenterEntity;
 import com.iothings.entity.CourseEntity;
 import com.iothings.service.CertificationCenterService;
@@ -25,9 +26,9 @@ public class CertificationCenterServiceImpl implements CertificationCenterServic
         private CertificationCenterRepository certificationCenterRepository;
 
         @Override
-        public List<CertificationCenterEntity> findPopularCertificates() {
-                List<CertificationCenterEntity> certificationCenterEntity = certificationCenterRepository.findCertificationCenterEntityBean();
+        public List<CertificationCenterDTO> findPopularCertificates() {
+                List<CertificationCenterDTO> certificationCenterDTO = certificationCenterRepository.findCertificationCenterEntityBean();
 
-                return certificationCenterEntity;
+                return certificationCenterDTO;
         }
 }

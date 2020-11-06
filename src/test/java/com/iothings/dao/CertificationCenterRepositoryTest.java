@@ -1,5 +1,6 @@
 package com.iothings.dao;
 
+import com.iothings.dto.CertificationCenterDTO;
 import com.iothings.entity.CertificationCenterEntity;
 import com.iothings.entity.ProductCategory;
 import org.junit.Assert;
@@ -41,7 +42,7 @@ public class CertificationCenterRepositoryTest {
 */
     @Test
     public void findCertificationCenterBeanInTest(){
-        List<CertificationCenterEntity> result=repository.findCertificationCenterEntityBean();
+        List<CertificationCenterDTO> result=repository.findCertificationCenterEntityBean();
         Assert.assertNotEquals(0,result.size());
     }
 }
