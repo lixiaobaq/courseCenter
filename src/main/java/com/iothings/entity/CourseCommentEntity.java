@@ -12,4 +12,8 @@ public class CourseCommentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private Long courseId;
+    private Long score;
+    private String evaluate;
 }

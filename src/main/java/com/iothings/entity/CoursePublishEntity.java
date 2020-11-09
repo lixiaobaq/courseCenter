@@ -40,5 +40,6 @@ public class CoursePublishEntity extends CourseEntity{
     private Date createTime;
     @UpdateTimestamp
     private Date updateTime;
-
+    //0最热, 1最新(默认0)
+    private String type;
 }

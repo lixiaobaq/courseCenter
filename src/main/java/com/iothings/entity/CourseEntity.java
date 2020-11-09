@@ -25,6 +25,7 @@ public class CourseEntity {
     private String introduction;
     private Long frameId;
     private Long createrId;
+    private Long industry;
     /**
      * 封面
      */
