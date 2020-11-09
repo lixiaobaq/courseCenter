@@ -2,7 +2,9 @@ package com.iothings.dao;
 
 import com.iothings.entity.CourseFrame;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,4 +32,16 @@ public interface CourseFrameRepository extends JpaRepository<CourseFrame,Long> {
      */
     @Query(value = "SELECT  COUNT(*) FROM `course` WHERE FIND_IN_SET( ?1, frame_id) ",nativeQuery = true)
     Integer findCourseNumByFrame(Integer id);
+
+    /**
+     * 修改课程分类排序
+     * @param id
+     * @param parentId
+     * @param sort
+     * @return
+     */
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE course_frame SET parentid=?2 ,sort=?3 WHERE id=?1",nativeQuery = true)
+    Integer updataByid(Integer id,Integer parentId,Integer sort);
 }

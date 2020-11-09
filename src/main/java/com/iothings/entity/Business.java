@@ -1,6 +1,5 @@
 package com.iothings.entity;
 
-import com.iothings.dto.CourseFrameDTO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,13 +7,13 @@ import java.util.List;
 
 /**
  * @author: Alex
- * @time:2020/10/29 10:29 PM
- * @Description：课程分类
+ * @time:2020/11/6 11:04
+ * @Description
  */
 @Entity
-@Table(name = "course_frame")
+@Table(name = "business")
 @Data
-public class CourseFrame {
+public class Business {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,18 +22,8 @@ public class CourseFrame {
     private Integer level;
     private Integer parentid;
     private Integer status;
-    private String isOpen;
-
     @Transient
-    private List<CourseFrame> children;
+    private List<Business> children;
     @Transient
-    private Integer coursenum;
-
-    public CourseFrame(){
-
-    }
-
-    public void chanegParent(){}
-
-    public void changeStatus(){}
+    private Integer num;
 }

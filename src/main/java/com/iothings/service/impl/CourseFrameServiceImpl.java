@@ -2,6 +2,7 @@ package com.iothings.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.iothings.dao.CourseFrameRepository;
+import com.iothings.dto.CourseFrameDTO;
 import com.iothings.entity.CourseFrame;
 import com.iothings.service.CourseFrameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class CourseFrameServiceImpl implements CourseFrameService {
     @Override
     public void delete(Integer id){
         repository.deleteById(Long.valueOf(id));
+    }
+
+    @Override
+    public Integer updataByid(Integer id, Integer pid, Integer sort) {
+        return repository.updataByid(id,pid,sort);
     }
 
     /**
