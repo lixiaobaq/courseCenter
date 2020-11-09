@@ -1,5 +1,6 @@
 package com.iothings.service.impl;
 
+import com.iothings.dto.CertificationCenterDTO;
 import com.iothings.entity.CertificationCenterEntity;
 import com.iothings.entity.ProductCategory;
 import org.junit.Assert;
@@ -22,7 +23,7 @@ public class CertificationCenterServiceImplTest {
 
     @Test
     public void findByCategoryTypeIn() {
-        List<CertificationCenterEntity> certificationCenterEntity=certificationCenterServiceImpl.findPopularCertificates();
+        List<CertificationCenterDTO> certificationCenterEntity=certificationCenterServiceImpl.findPopularCertificates();
         Assert.assertNotEquals(0,certificationCenterEntity.size());
     }
 }

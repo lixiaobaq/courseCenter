@@ -1,5 +1,6 @@
 package com.iothings.service;
 
+import com.iothings.dto.CertificationCenterDTO;
 import com.iothings.entity.CertificationCenterEntity;
 
 import java.util.List;
@@ -13,5 +14,5 @@ import java.util.List;
  */
 public interface CertificationCenterService {
 
-        List<CertificationCenterEntity> findPopularCertificates();
+        List<CertificationCenterDTO> findPopularCertificates();
 }
