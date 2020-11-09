@@ -1,5 +1,6 @@
 package com.iothings.service;
 
+import com.iothings.dto.CourseFrameDTO;
 import com.iothings.entity.CourseFrame;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface CourseFrameService {
     public List<CourseFrame> getTreeAndCourseCounts(Integer status);
 
     public void delete(Integer id);
+
+    public Integer updataByid(Integer id,Integer pid,Integer sort);
 }

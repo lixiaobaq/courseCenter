@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -53,5 +54,11 @@ public class CourseFrameRepositoryTest {
     public void findCourseNumByFrame(){
         Integer courseFrame=courseFrameRepository.findCourseNumByFrame(13);
         System.out.println("lieb:"+courseFrame);
+    }
+
+    @Test
+    public void updataByid(){
+        Integer courseFrame1= courseFrameRepository.updataByid(1,10,5);
+        System.out.println("后:"+courseFrame1);
     }
 }
