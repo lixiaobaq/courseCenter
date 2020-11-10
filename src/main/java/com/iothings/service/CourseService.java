@@ -4,7 +4,9 @@ import com.iothings.entity.CourseEntity;
 import com.iothings.entity.CourseFrame;
 import com.iothings.entity.CoursePublishEntity;
 import com.iothings.form.CourseForm;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -21,4 +23,10 @@ public interface CourseService {
     void delete(Long id);
 
     CourseEntity verifyCourse(CourseForm courseForm);
+
+    void batchDelete(String ids);
+
+    void saveCoursePublishById(Long id);
+
+    String uploadImg(File file);
 }

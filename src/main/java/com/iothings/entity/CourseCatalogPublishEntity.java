@@ -15,17 +15,22 @@ public class CourseCatalogPublishEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = true, columnDefinition = "bigint COMMENT '课程id'")
     private Long courseId;
-    //层级
+    @Column(nullable = true, columnDefinition = "bigint COMMENT '层级'")
     private Long levelOf;
-    //序号
+    @Column(nullable = true, columnDefinition = "bigint COMMENT '序号'")
     private Long indexOf;
-    //父节点
+    @Column(nullable = true, columnDefinition = "bigint COMMENT '父节点'")
     private Long parentId;
+    @Column(nullable = true, columnDefinition = "varchar COMMENT '图标'")
     private String icon;
+    @Column(nullable = true, columnDefinition = "varchar COMMENT '标题'")
     private String title;
-    //0资源 1任务
+    @Column(nullable = true, columnDefinition = "varchar COMMENT '类型'")
     private String type;
+    @Column(nullable = true, columnDefinition = "bigint COMMENT '资源id'")
     private Long resourceId;
+    @Column(nullable = true, columnDefinition = "bigint COMMENT '任务id'")
     private Long taskId;
 }

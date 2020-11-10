@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -114,6 +115,55 @@ public class CourseController {
         try {
             CourseEntity courseEntity = courseServiceImpl.verifyCourse(courseForm);
             resultVO = ResultVOUtil.success(courseEntity);
+        }catch (Exception e){
+            e.printStackTrace();
+            resultVO = ResultVOUtil.error(ResultEnum.MANAGER_ERROR);
+        }
+        return resultVO;
+    }
+
+    /**
+     * 课程批量删除
+     * @param ids
+     * @return
+     */
+    @PostMapping("batch_delete")
+    public ResultVO batchDelete(@RequestBody @Valid String ids) {
+        ResultVO resultVO = new ResultVO();
+        try {
+            courseServiceImpl.batchDelete(ids);
+            resultVO = ResultVOUtil.success("");
+        }catch (Exception e){
+            e.printStackTrace();
+            resultVO = ResultVOUtil.error(ResultEnum.MANAGER_ERROR);
+        }
+        return resultVO;
+    }
+
+    /**
+     * 课程提交审核
+     * @param id
+     * @return
+     */
+    @PostMapping("action")
+    public ResultVO action(@RequestBody @Valid String id) {
+        ResultVO resultVO = new ResultVO();
+        try {
+            courseServiceImpl.saveCoursePublishById(Long.parseLong(id));
+            resultVO = ResultVOUtil.success("");
+        }catch (Exception e){
+            e.printStackTrace();
+            resultVO = ResultVOUtil.error(ResultEnum.MANAGER_ERROR);
+        }
+        return resultVO;
+    }
+
+    @PostMapping("album_up")
+    public ResultVO albumUp(@RequestBody @Valid File file) {
+        ResultVO resultVO = new ResultVO();
+        try {
+            String url = courseServiceImpl.uploadImg(file);
+            resultVO = ResultVOUtil.success("");
         }catch (Exception e){
             e.printStackTrace();
             resultVO = ResultVOUtil.error(ResultEnum.MANAGER_ERROR);
