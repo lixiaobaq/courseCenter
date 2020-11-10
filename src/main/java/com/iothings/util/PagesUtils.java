@@ -1,6 +1,7 @@
 package com.iothings.util;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,19 +32,4 @@ public class PagesUtils {
                 new Sort(null != pages.getDirection() && !"".equals(pages.getDirection()) && pages.getDirection().equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,
                         StringUtils.isEmpty(pages.getSortColumn()) ? ID : pages.getSortColumn()));
     }
-
-    /**
-     * 封装数据供前台分页格式
-     * @param page
-     * @return
-     */
-    public static Object toString(Page page){
-        Object obj = new Object();
-       // obj.p
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("total",page.getTotalElements());
-        jsonObject.put("list",page.getContent());
-        return jsonObject.toJSONString();
-    }
-
 }
