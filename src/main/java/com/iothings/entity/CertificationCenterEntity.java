@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * @Description：
  */
 @Entity
-@Table(name = "popularCertificates")
+@Table(name = "certificates")
 @Data
 public class CertificationCenterEntity {
     @Id
@@ -49,4 +49,6 @@ public class CertificationCenterEntity {
     @Column(nullable = true, columnDefinition = "text COMMENT '认证介绍'")
     private String content;
 
+   /* @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY,optional=true)
+    private UserCertificationEntity userCertificationEntity;*/
 }

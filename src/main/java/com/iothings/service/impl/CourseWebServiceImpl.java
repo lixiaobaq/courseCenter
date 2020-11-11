@@ -29,7 +29,7 @@ public class CourseWebServiceImpl implements CourseWebService {
      * @param courseForm
      * @return
      */
-    @Override
+  /*  @Override
     public CourseCommentEntity addCurriculumEvaluation(CourseForm courseForm) {
         CourseCommentEntity courseComment = new CourseCommentEntity();
         courseComment.setCourseId(Long.parseLong(courseForm.getCourseId()));
@@ -45,7 +45,7 @@ public class CourseWebServiceImpl implements CourseWebService {
      * @param pageNo
      * @param createrId
      * @return
-     */
+     * /
     @Override
     public List<CourseEntity> findCourseAllByCreaterId(Integer paseSize, Integer pageNo, Long createrId) {
         return courseWebRepository.findCourseAllByCreaterId(paseSize, pageNo, createrId);
@@ -56,7 +56,7 @@ public class CourseWebServiceImpl implements CourseWebService {
      *
      * @param createrId
      * @return
-     */
+     * /
     @Override
     public Integer findCourseAllNumbersByCreaterId(Long createrId) {
         return courseWebRepository.findCourseAllNumbersByCreaterId(createrId);
@@ -70,5 +70,5 @@ public class CourseWebServiceImpl implements CourseWebService {
     @Override
     public Integer findRecommendedCoursesAllNumbers(CourseForm courseForm) {
         return courseWebRepository.findRecommendedCoursesAllNumbers(courseForm.getDirection(), courseForm.getCourseSort(), courseForm.getCourseType(), courseForm.getType());
-    }
+    }*/
 }

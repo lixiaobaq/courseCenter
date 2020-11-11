@@ -22,7 +22,9 @@ public enum ResultEnum {
     TOKEN_INVALID(3, "token无效"),
     CARSTLE_NULL(4, "所选车型不存在"),
     PASSWORD_ERROR(5, "密码错误"),
-    MANAGER_ERROR(6, "后台错误"),;
+    MANAGER_ERROR(6, "后台错误"),
+    EXISTS_ERROR(-1, "数据不存在"),
+    UPLOAD_ERROR(-1, "不支持上传的文件类型."),;
 
     ResultEnum(Integer code, String message) {
         this.code = code;
