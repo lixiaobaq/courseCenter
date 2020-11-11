@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "seniority")
 @Data
 public class Seniority {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

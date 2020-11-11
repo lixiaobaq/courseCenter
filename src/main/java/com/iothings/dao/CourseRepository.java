@@ -18,4 +18,13 @@ public interface CourseRepository extends JpaRepository<CoursePublishEntity,Long
 
     @Query(value = "SELECT COUNT(*) FROM course_publish cp LEFT JOIN course c ON c.id = cp.course_id", nativeQuery=true)
     Integer findCourseAllNumbers();
+
+
+    /**
+     * 获取课程分类下的所有课程数量(勿删)
+     * @param id
+     * @return
+     */
+    @Query(value = "SELECT  COUNT(*) FROM `course` WHERE FIND_IN_SET( ?1, frame_id) ",nativeQuery = true)
+    Integer findCourseNumByFrame(Integer id);
 }
