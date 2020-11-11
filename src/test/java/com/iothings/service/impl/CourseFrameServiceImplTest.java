@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,19 +21,21 @@ public class CourseFrameServiceImplTest {
     private CourseFrameServiceImpl courseFrameServiceImpl;
 
     @Test
-    //@Transactional
+    @Transactional
     public void saveTest() {
         CourseFrame courseFrame=new CourseFrame();
         courseFrame.setLevel(1);
         courseFrame.setName("测试");
         courseFrame.setParentId(0);
         courseFrame.setStatus(0);
+        courseFrame.setSort("1");
+        courseFrame.setIsOpen("0");
         CourseFrame result = courseFrameServiceImpl.save(courseFrame);
         System.out.println("lieb:"+ JSONObject.toJSONString(result));
         Assert.assertNotNull(result);
     }
     @Test
-    //@Transactional
+    @Transactional
     public void editTest() {
         CourseFrameForm courseFrameForm=new CourseFrameForm();
         courseFrameForm.setId(31l);
