@@ -2,8 +2,10 @@ package com.iothings.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.iothings.dao.BusinessRepository;
+import com.iothings.dao.CourseRepository;
 import com.iothings.entity.Business;
 import com.iothings.entity.CourseFrame;
+import com.iothings.form.BusinessForm;
 import com.iothings.service.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +22,19 @@ import java.util.List;
 public class BusinessServiceImpl implements BusinessService {
     @Autowired
     private BusinessRepository repository;
+    @Autowired
+    private CourseRepository courseRepository;
 
     @Override
     public Business save(Business business) {
+        return repository.save(business);
+    }
+
+    @Override
+    public Business edit(BusinessForm businessForm) {
+        Business business= repository.getOne(businessForm.getId());
+        business.setStatus(businessForm.getReleas_status());
+        business.setName(businessForm.getName());
         return repository.save(business);
     }
 
@@ -31,7 +43,7 @@ public class BusinessServiceImpl implements BusinessService {
         List<Business> CourseFrameList=repository.findByStatus(status);
         List<Business> CourseFrameList1=new ArrayList<Business>();
         for (Business business:CourseFrameList) {
-            if(business.getParentid()==0){
+            if(business.getParentId()==0){
                 List<Business> CourseFrameList2= getCourseFrameList2(CourseFrameList,business.getId(),status,"0");
                 business.setChildren(CourseFrameList2);
                 CourseFrameList1.add(business);
@@ -48,12 +60,17 @@ public class BusinessServiceImpl implements BusinessService {
 
     @Override
     public void delete(Integer id) {
-
+        repository.deleteById(Long.valueOf(id));
     }
 
     @Override
-    public Integer updataByid(Integer id, Integer pid, Integer sort) {
-        return repository.updataByid(id,pid,sort);
+    public Business updataByid(Integer id, Integer pid, Integer sort) {
+        return null;
+    }
+
+    @Override
+    public boolean existsById(Integer id) {
+        return repository.existsById(Long.valueOf(id));
     }
 
 
@@ -68,10 +85,10 @@ public class BusinessServiceImpl implements BusinessService {
     public List<Business> getCourseFrameList2(List<Business> list, Long id, Integer status, String type){
         List<Business> CourseFrameList1=new ArrayList<Business>();
         for (Business CourseFrame:list) {
-            if(CourseFrame.getParentid()==Math.toIntExact(id)){
+            if(CourseFrame.getParentId()==Math.toIntExact(id)){
                 List<Business> CourseFrameList2= getCourseFrameList2(list,CourseFrame.getId(),status,type);
                 if(type=="1"){
-                    Integer num= repository.findCourseNumByFrame(Math.toIntExact(CourseFrame.getId()));
+                    Integer num= courseRepository.findCourseNumByFrame(Math.toIntExact(CourseFrame.getId()));
                     if(num>0){
                         num+= getNumSum(CourseFrameList2);//子级的课程总数和加自身的课程数量
                         CourseFrame.setNum(num);

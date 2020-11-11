@@ -34,12 +34,4 @@ public class CourseFrame {
     private List<CourseFrame> children;
     @Transient
     private Integer coursenum;
-
-    public CourseFrame(){
-
-    }
-
-    public void chanegParent(){}
-
-    public void changeStatus(){}
 }
