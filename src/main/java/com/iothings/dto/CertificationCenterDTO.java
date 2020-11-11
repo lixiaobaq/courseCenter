@@ -1,6 +1,8 @@
 package com.iothings.dto;
 
 
+import lombok.Value;
+
 /**
  * @Package： com.iothings.dto
  * @author： ZDL

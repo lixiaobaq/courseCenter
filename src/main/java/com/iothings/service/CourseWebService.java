@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface CourseWebService {
 
-    CourseCommentEntity addCurriculumEvaluation(CourseForm courseForm);
+   /* CourseCommentEntity addCurriculumEvaluation(CourseForm courseForm);
 
     List<CourseEntity> findCourseAllByCreaterId(Integer paseSize, Integer pageNo, Long createrId);
 
@@ -20,5 +20,5 @@ public interface CourseWebService {
 
     List<CoursePublishEntity> findRecommendedCoursesAll(CourseForm courseForm);
 
-    Integer findRecommendedCoursesAllNumbers(CourseForm courseForm);
+    Integer findRecommendedCoursesAllNumbers(CourseForm courseForm);*/
 }

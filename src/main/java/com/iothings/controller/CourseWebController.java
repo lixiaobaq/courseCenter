@@ -38,8 +38,8 @@ public class CourseWebController {
     public ResultWebVO curriculumEvaluation(@RequestBody @Valid CourseForm courseForm) {
         ResultWebVO resultVO = new ResultWebVO();
         try {
-            CourseCommentEntity courseCommentEntity = courseWebServiceImpl.addCurriculumEvaluation(courseForm);
-            resultVO = ResultWebVOUtil.success(courseCommentEntity);
+          /*  CourseCommentEntity courseCommentEntity = courseWebServiceImpl.addCurriculumEvaluation(courseForm);
+            resultVO = ResultWebVOUtil.success(courseCommentEntity);*/
         }catch (Exception e){
             e.printStackTrace();
             resultVO = ResultWebVOUtil.save_error(ResultEnum.MANAGER_ERROR);
@@ -56,15 +56,15 @@ public class CourseWebController {
     public ResultWebVO myCourse(@RequestBody @Valid CourseForm courseForm) {
         ResultWebVO resultVO = new ResultWebVO();
         try {
-            Integer paseSize = courseForm.getPageSize();
+          /*  Integer paseSize = courseForm.getPageSize();
             Integer pageNo = courseForm.getPageOn();
             List<CourseEntity> courseEntityList = courseWebServiceImpl.findCourseAllByCreaterId(paseSize, pageNo, 1l);
-            Integer total = courseWebServiceImpl.findCourseAllNumbersByCreaterId(1l);
+            Integer total = courseWebServiceImpl.findCourseAllNumbersByCreaterId(1l);*/
             PageVO pageVO = new PageVO();
-            pageVO.setDataList(courseEntityList);
+           /* pageVO.setDataList(courseEntityList);
             pageVO.setPaseSize(paseSize);
             pageVO.setPageNo(pageNo);
-            pageVO.setTotal(total);
+            pageVO.setTotal(total);*/
             resultVO = ResultWebVOUtil.success(pageVO);
         }catch (Exception e){
             e.printStackTrace();
@@ -82,13 +82,13 @@ public class CourseWebController {
     public ResultWebVO recommendedCourses(@RequestBody @Valid CourseForm courseForm) {
         ResultWebVO resultVO = new ResultWebVO();
         try {
-            List<CoursePublishEntity> courseEntityList = courseWebServiceImpl.findRecommendedCoursesAll(courseForm);
-            Integer total = courseWebServiceImpl.findRecommendedCoursesAllNumbers(courseForm);
+          /*  List<CoursePublishEntity> courseEntityList = courseWebServiceImpl.findRecommendedCoursesAll(courseForm);
+            Integer total = courseWebServiceImpl.findRecommendedCoursesAllNumbers(courseForm);*/
             PageVO pageVO = new PageVO();
-            pageVO.setDataList(courseEntityList);
+          /*  pageVO.setDataList(courseEntityList);
             pageVO.setPaseSize(courseForm.getPageSize());
             pageVO.setPageNo(courseForm.getPageOn());
-            pageVO.setTotal(total);
+            pageVO.setTotal(total);*/
             resultVO = ResultWebVOUtil.success(pageVO);
         }catch (Exception e){
             e.printStackTrace();
