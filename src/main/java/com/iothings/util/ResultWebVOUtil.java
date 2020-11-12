@@ -7,7 +7,7 @@ public class ResultWebVOUtil {
     public static ResultWebVO success(Object object) {
         ResultWebVO resultVO = new ResultWebVO();
         resultVO.setCode(0);
-        resultVO.setMsg("s`uccess");
+        resultVO.setMsg("success");
         resultVO.setResult(object);
         return resultVO;
     }

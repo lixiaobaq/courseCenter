@@ -1,5 +1,6 @@
 package com.iothings.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "course_learning_progress")
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseLearningProgressEntity {
 
     @Id

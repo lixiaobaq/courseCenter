@@ -14,10 +14,12 @@ import java.math.BigDecimal;
 @Data
 @ApiModel(value = "CourseForm", description = "课程Form")
 public class CourseForm {
+    @JsonProperty("id")
+    private String id;
     @JsonProperty("course_id")
     private String courseId;
-    @JsonProperty("tilte")
-    private String tilte;
+    @JsonProperty("title")
+    private String title;
     @JsonProperty("sub_title")
     private String subTitle;
     @JsonProperty("introduction")
@@ -77,4 +79,8 @@ public class CourseForm {
     private String courseType;
     @JsonProperty("type")
     private String type;
+    @JsonProperty("desc")
+    private String desc;
+    @JsonProperty("name")
+    private String name;
 }

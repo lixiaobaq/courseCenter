@@ -1,12 +1,19 @@
 package com.iothings.service;
 
+import com.iothings.VO.KeywordVO;
 import com.iothings.entity.CourseEntity;
 import com.iothings.entity.CourseFrame;
 import com.iothings.entity.CoursePublishEntity;
+import com.iothings.entity.ResourceEntity;
+import com.iothings.exception.UnsupportedFileTypeException;
 import com.iothings.form.CourseForm;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.bind.PropertyException;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -14,19 +21,23 @@ import java.util.List;
  */
 public interface CourseService {
 
-    List<CoursePublishEntity> findAll(Integer paseSize, Integer pageNo, String keywords, String keywordType, String industry, String verifyStatus, String styleId);
-
-    Integer findCourseAllNumbers();
+    Page<CoursePublishEntity> findCourseAll(Pageable pageable, KeywordVO keywordVO);
 
     CourseEntity addCourse(CourseForm courseForm);
 
-    void delete(Long id);
+    boolean delete(Long id);
 
-    CourseEntity verifyCourse(CourseForm courseForm);
+    CoursePublishEntity verifyCourse(CourseForm courseForm);
 
-    void batchDelete(String ids);
+    boolean batchDelete(String ids);
 
-    void saveCoursePublishById(Long id);
+    CoursePublishEntity saveCoursePublishById(Long id);
 
-    String uploadImg(File file);
+    String uploadImg(File file) throws UnsupportedFileTypeException, IOException, PropertyException;
+
+    CoursePublishEntity findCoursePublishEntityById(Long id);
+
+    CourseEntity updateCourse(CourseForm courseForm);
+
+    ResourceEntity updateResourceEntity(CourseForm courseForm);
 }

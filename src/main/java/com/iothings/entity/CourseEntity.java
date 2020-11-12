@@ -1,5 +1,6 @@
 package com.iothings.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -16,52 +17,56 @@ import java.util.Date;
 @Entity
 @Table(name = "course")
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = true, columnDefinition = "varchar COMMENT '标题'")
+    @Column(nullable = true, columnDefinition = "varchar(50) COMMENT '标题'")
     private String title;
 
-    @Column(nullable = true, columnDefinition = "varchar COMMENT '副标题'")
+    @Column(nullable = true, columnDefinition = "varchar(150) COMMENT '副标题'")
     private String subTitle;
 
-    @Column(nullable = true, columnDefinition = "varchar COMMENT '介绍'")
+    @Column(nullable = true, columnDefinition = "longtext COMMENT '介绍'")
     private String introduction;
 
-    @Column(nullable = true, columnDefinition = "bigint COMMENT '分类id'")
-    private Long frameId;
+    @Column(nullable = true, columnDefinition = "varchar(255) COMMENT '分类id'")
+    private String frameId;
 
-    @Column(nullable = true, columnDefinition = "bigint COMMENT '创建者id'")
+    @Column(nullable = true, columnDefinition = "bigint(20) COMMENT '创建者id'")
     private Long createrId;
 
-    @Column(nullable = true, columnDefinition = "bigint COMMENT '产业id'")
+    @Column(nullable = true, columnDefinition = "bigint(20) COMMENT '产业id'")
     private Long industry;
 
-    @Column(nullable = true, columnDefinition = "varchar COMMENT '封面'")
+    @Column(nullable = true, columnDefinition = "varchar(255) COMMENT '封面'")
     private String titlePageUrls;
 
-    @Column(nullable = true, columnDefinition = "varchar COMMENT '0免费 1收费'")
+    @Column(nullable = true, columnDefinition = "char(1) COMMENT '0免费 1收费'")
     private String fee;
 
-    @Column(nullable = true, columnDefinition = "varchar COMMENT '评分1-5'")
+    @Column(nullable = true, columnDefinition = "char(1) COMMENT '评分1-5'")
     private String score;
 
-    @Column(nullable = true, columnDefinition = "bigint COMMENT '评分人次'")
+    @Column(nullable = true, columnDefinition = "bigint(20) COMMENT '评分人次'")
     private Long scoreCounts;
 
-    @Column(nullable = true, columnDefinition = "bigint COMMENT '学习人次'")
+    @Column(nullable = true, columnDefinition = "bigint(20) COMMENT '学习人次'")
     private Long learnCounts;
 
-    @Column(nullable = true, columnDefinition = "decimal COMMENT '原价'")
+    @Column(nullable = true, columnDefinition = "decimal(20) COMMENT '原价'")
     private BigDecimal price;
 
-    @Column(nullable = true, columnDefinition = "decimal COMMENT '现价'")
+    @Column(nullable = true, columnDefinition = "decimal(20) COMMENT '现价'")
     private BigDecimal currentPrice;
 
-    @Column(nullable = true, columnDefinition = "varchar COMMENT '简介 富文本'")
+    @Column(nullable = true, columnDefinition = "longtext COMMENT '简介 富文本'")
     private String summary;
+
+    @Column(nullable = true, columnDefinition = "bigint(20) COMMENT '创建机构id'")
+    private Long organ;
 
     @Column(updatable = false)
     @CreationTimestamp
