@@ -11,6 +11,7 @@ import com.iothings.util.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
@@ -22,18 +23,40 @@ import java.util.List;
  * @Description
  */
 @RestController
-@RequestMapping("/api/courseNotes/")
+@RequestMapping("/api")
 public class CourseNotesController {
     @Autowired
     private CourseNotesServiceImpl service;
-    @PostMapping("/list")
-    public ResultVO list(CourseNotesForm courseNotesForm){
+    @PostMapping("/courseNotes")
+    public ResultVO courseNotes(@RequestParam("id")String id,@RequestParam("token")String token){
+        //TOOD 等待token接口
+        String userId="1";
         try {
-            CourseNotesVO courseNotesVO=new CourseNotesVO();
-            List<CourseNotes> courseNoteslist=service.findByCourseId(Integer.parseInt(courseNotesForm.getId()));
-            courseNotesVO.setList(courseNoteslist);
-            System.out.println(JSONObject.toJSONString(courseNotesVO));
-            return ResultVOUtil.success(Arrays.asList(courseNotesVO));
+            if(userId!=null){
+                List<CourseNotes> courseNoteslist=service.findByCourseId(Integer.parseInt(id));
+                System.out.println(JSONObject.toJSONString(courseNoteslist));
+                return ResultVOUtil.success(Arrays.asList(courseNoteslist));
+            }else{
+                return ResultVOUtil.success(ResultEnum.TOKEN_INVALID.getMessage());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultVOUtil.success(ResultEnum.MANAGER_ERROR.getMessage());
+        }
+    }
+    @PostMapping("/saveCourseNotes")
+    public ResultVO saveCourseNotes(CourseNotesForm courseNotesForm, @RequestParam("token")String token){
+        //TOOD 等待token接口
+        String userId="1";
+        try {
+            if(userId!=null){
+                courseNotesForm.setUserId(userId);
+                CourseNotes courseNotes=service.save(courseNotesForm);
+                System.out.println(JSONObject.toJSONString(courseNotes));
+                return ResultVOUtil.success(Arrays.asList(courseNotes));
+            }else{
+                return ResultVOUtil.success(ResultEnum.TOKEN_INVALID.getMessage());
+            }
         }catch (Exception e){
             e.printStackTrace();
             return ResultVOUtil.success(ResultEnum.MANAGER_ERROR.getMessage());
