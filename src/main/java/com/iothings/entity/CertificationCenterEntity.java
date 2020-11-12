@@ -1,6 +1,9 @@
 package com.iothings.entity;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -13,10 +16,15 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "certificates")
-@Data
+//@Data
+@Getter
+@Setter
+
+@EntityListeners(AuditingEntityListener.class)
 public class CertificationCenterEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Column(nullable = true, columnDefinition = "bigint COMMENT '行业id、所属资历'")
@@ -40,8 +48,12 @@ public class CertificationCenterEntity {
     @Column(nullable = true, columnDefinition = "varchar(50) COMMENT '证书认证机构'")
     private String authentication;
 
-    @Column(nullable = true, columnDefinition = "int COMMENT '证书认证机构id'")
-    private int authenticationId;
+    /*@Column(nullable = true, columnDefinition = "int COMMENT '证书认证机构id'")
+    private int authenticationId;*/
+	@JsonBackReference
+    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY,optional=true)
+    @JoinColumn(name="authentication_id",referencedColumnName = "id",nullable=true, columnDefinition = "bigint COMMENT '证书认证机构id'")
+    private CertificateAuthorityEntity certificateAuthorityEntity;
 
     @Column(nullable = true, columnDefinition = "varchar(50) COMMENT '学分'")
     private int credit;
@@ -51,4 +63,5 @@ public class CertificationCenterEntity {
 
    /* @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY,optional=true)
     private UserCertificationEntity userCertificationEntity;*/
+
 }

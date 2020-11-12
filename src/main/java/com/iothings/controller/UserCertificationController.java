@@ -3,6 +3,7 @@ package com.iothings.controller;
 import com.iothings.VO.PageBeanVO;
 import com.iothings.VO.PageVO;
 import com.iothings.VO.ResultWebVO;
+import com.iothings.VO.UserCertificationVO;
 import com.iothings.entity.UserCertificationEntity;
 import com.iothings.service.UserCertificationService;
 import com.iothings.util.Pages;
@@ -33,7 +34,7 @@ public class UserCertificationController {
      */
    // @RequestMapping(value="/myCertificate",method={RequestMethod.POST, RequestMethod.GET})
     @PostMapping("myCertificate")
-    public ResultWebVO<Page<UserCertificationEntity>> findAll(Pages pages, UserCertificationEntity userCertificationEntity){
+    public ResultWebVO<Page<UserCertificationVO>> findAll(Pages pages, UserCertificationEntity userCertificationEntity){
         ResultWebVO resultWebVO = new ResultWebVO();
         PageBeanVO pageBeanVO = new PageBeanVO();
         Page page = userCertificationService.findAll(userCertificationEntity, PagesUtils.createPageRequest(pages));

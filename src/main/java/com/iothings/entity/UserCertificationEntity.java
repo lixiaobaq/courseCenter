@@ -33,8 +33,8 @@ public class UserCertificationEntity{
     @Column(nullable = true, columnDefinition = "tinyint(1) COMMENT '考核状态'")
     private boolean assessmentStatus ;
 
-    @Transient
-    @Column(nullable = true, columnDefinition = "int COMMENT '考核时间'")
+    //@Transient
+    @Column(nullable = true, columnDefinition = "datetime COMMENT '考核时间'")
     @CreationTimestamp
     private Date assessmentTime ;
 

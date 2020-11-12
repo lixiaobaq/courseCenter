@@ -21,7 +21,7 @@ import java.util.List;
  * @author： ZDL
  * @date： 2020/11/5 10:55
  * @version： V1.0
- * @Description： 证书表
+ * @Description： 我的证书
  */
 @Service
 public class UserCertificationServiceImpl implements UserCertificationService {
@@ -30,7 +30,7 @@ public class UserCertificationServiceImpl implements UserCertificationService {
     private UserCertificationRepository userCertificationRepository;
 
     /**
-     * 列表
+     * 证书列表
      *
      * @return
      */

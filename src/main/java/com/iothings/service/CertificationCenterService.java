@@ -2,7 +2,6 @@ package com.iothings.service;
 
 import com.iothings.dto.CertificationCenterDTO;
 import com.iothings.entity.CertificationCenterEntity;
-import com.iothings.entity.CourseFrame;
 
 import java.util.List;
 
@@ -22,11 +21,18 @@ public interface CertificationCenterService {
         List<CertificationCenterDTO> findPopularCertificates();
 
         /**
+         *  用Specification作的多表查询，但未出来，暂时弃用
+         * @return
+         */
+        List<CertificationCenterEntity> findCertificates();
+
+        /**
          * 添加
          * @param certificationCenterEntity
          * @return
          */
         CertificationCenterEntity save(CertificationCenterEntity certificationCenterEntity);
+
 
         /**
          * 删除
