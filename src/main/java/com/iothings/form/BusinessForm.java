@@ -1,5 +1,6 @@
 package com.iothings.form;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -10,6 +11,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel(value = "BusinessForm", description = "行业分类Form")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BusinessForm {
     private Long id;
     private String name;

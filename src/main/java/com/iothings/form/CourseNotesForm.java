@@ -1,7 +1,12 @@
 package com.iothings.form;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.Column;
+import java.util.Date;
 
 /**
  * @author: Alex
@@ -10,6 +15,11 @@ import lombok.Data;
  */
 @Data
 @ApiModel(value = "CourseNotesForm", description = "课程笔记Form")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseNotesForm {
-    private String id;
+    private Long id;
+    private String userId;
+    private String content;
+    private Integer courseId;
+    private String linkCourseTime;
 }
