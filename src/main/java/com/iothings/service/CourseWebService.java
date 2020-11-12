@@ -1,9 +1,10 @@
 package com.iothings.service;
 
-import com.iothings.entity.CourseCommentEntity;
-import com.iothings.entity.CourseEntity;
-import com.iothings.entity.CoursePublishEntity;
+import com.iothings.VO.KeywordVO;
+import com.iothings.entity.*;
 import com.iothings.form.CourseForm;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -12,13 +13,13 @@ import java.util.List;
  */
 public interface CourseWebService {
 
-   /* CourseCommentEntity addCurriculumEvaluation(CourseForm courseForm);
+    CourseCommentEntity addCurriculumEvaluation(CourseForm courseForm);
 
-    List<CourseEntity> findCourseAllByCreaterId(Integer paseSize, Integer pageNo, Long createrId);
+    Page<CourseEntity> findCourseAllByCreaterId(Pageable pageable, Long createrId);
 
-    Integer findCourseAllNumbersByCreaterId(Long createrId);
+    Page<CoursePublishEntity> findRecommendedCoursesAll(Pageable pageable, KeywordVO keywordVO);
 
-    List<CoursePublishEntity> findRecommendedCoursesAll(CourseForm courseForm);
+    List<CourseCatalogEntity> findCourseCatalogAll(Long id);
 
-    Integer findRecommendedCoursesAllNumbers(CourseForm courseForm);*/
+    ResourcePublishEntity findResourcePublishById(Long id);
 }

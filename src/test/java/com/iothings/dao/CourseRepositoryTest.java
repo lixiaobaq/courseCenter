@@ -23,7 +23,7 @@ public class CourseRepositoryTest {
     @Test
     @Transactional
     public void saveTest(){
-        CoursePublishEntity courseEntity=new CoursePublishEntity();
+        CourseEntity courseEntity=new CourseEntity();
 
         courseEntity.setTitle("工业互联网2223");
         courseEntity.setSubTitle("这是一本工业互333联的书");

@@ -22,4 +22,5 @@ public interface CertificationCenterDTO {
     int getCredit();
 
     String getCourse();
+
 }

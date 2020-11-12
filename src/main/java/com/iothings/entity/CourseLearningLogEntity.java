@@ -12,12 +12,12 @@ public class CourseLearningLogEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //内容
+    @Column(nullable = true, columnDefinition = "longtext COMMENT '内容'")
     private String content;
-    //资源类型
+    @Column(nullable = true, columnDefinition = "varchar COMMENT '资源类型'")
     private String resourceType;
-    //是视频时，对应当前资源的播放位置时间
+    @Column(nullable = true, columnDefinition = "varchar COMMENT '是视频时，对应当前资源的播放位置时间'")
     private String playtime;
-    //是文档时，记录当前页数
+    @Column(nullable = true, columnDefinition = "bigint(20) COMMENT '是文档时，记录当前页数'")
     private Long pages;
 }

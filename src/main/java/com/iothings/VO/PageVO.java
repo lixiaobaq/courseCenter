@@ -14,10 +14,10 @@ public class PageVO {
     @JsonProperty("list")
     private Object dataList;
 
-    @JsonProperty("paseSize")
+    @JsonProperty("pase_size")
     private Integer paseSize;
 
-    @JsonProperty("pageNo")
+    @JsonProperty("page_no")
     private Integer pageNo;
 
     @JsonProperty("total")

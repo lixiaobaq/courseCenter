@@ -1,5 +1,6 @@
 package com.iothings.form;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -13,27 +14,73 @@ import java.math.BigDecimal;
 @Data
 @ApiModel(value = "CourseForm", description = "课程Form")
 public class CourseForm {
-    private Integer courseId;
-    private String tilte;
+    @JsonProperty("id")
+    private String id;
+    @JsonProperty("course_id")
+    private String courseId;
+    @JsonProperty("title")
+    private String title;
+    @JsonProperty("sub_title")
     private String subTitle;
+    @JsonProperty("introduction")
     private String introduction;
-    private Long frameId;
-    private Long createrId;
+    @JsonProperty("frame_id")
+    private String frameId;
+    @JsonProperty("creater_id")
+    private String createrId;
+    @JsonProperty("style_id")
+    private String styleId;
+    @JsonProperty("images")
+    private String images;
+    @JsonProperty("content")
+    private String content;
+    @JsonProperty("industry")
+    private String industry;
+    @JsonProperty("verify_status")
+    private String verifyStatus;
+    @JsonProperty("reason")
+    private String reason;
     //封面
+    @JsonProperty("title_page_urls")
     private String titlePageUrls;
     //0免费 1收费
+    @JsonProperty("fee")
     private String fee;
     //评分1-5
+    @JsonProperty("score")
     private String score;
     //评分人次
-    private Long scoreCounts;
+    @JsonProperty("score_counts")
+    private String scoreCounts;
     //学习人次
-    private Long learnCounts;
+    @JsonProperty("learn_counts")
+    private String learnCounts;
     //原价
-    private BigDecimal price;
+    @JsonProperty("price")
+    private String price;
     //现价
-    private BigDecimal currentPrice;
+    @JsonProperty("current_price")
+    private String currentPrice;
     //简介 富文本
+    @JsonProperty("summary")
+    //评价
     private String summary;
-
+    @JsonProperty("evaluate")
+    private String evaluate;
+    @JsonProperty("pageSize")
+    private Integer pageSize;
+    @JsonProperty("pageOn")
+    private Integer pageOn;
+    @JsonProperty("direction")
+    private String direction;
+    @JsonProperty("courseSort")
+    private String courseSort;
+    @JsonProperty("courseType")
+    private String courseType;
+    @JsonProperty("type")
+    private String type;
+    @JsonProperty("desc")
+    private String desc;
+    @JsonProperty("name")
+    private String name;
 }

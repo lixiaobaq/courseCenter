@@ -1,15 +1,21 @@
 package com.iothings.service.impl;
 
-import com.iothings.dao.CourseRepository;
-import com.iothings.dao.CourseWebRepository;
-import com.iothings.entity.CourseCommentEntity;
-import com.iothings.entity.CourseEntity;
-import com.iothings.entity.CoursePublishEntity;
+import com.iothings.VO.KeywordVO;
+import com.iothings.dao.*;
+import com.iothings.entity.*;
 import com.iothings.form.CourseForm;
 import com.iothings.service.CourseWebService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +27,22 @@ import java.util.List;
 public class CourseWebServiceImpl implements CourseWebService {
 
     @Autowired
-    private CourseWebRepository courseWebRepository;
+    private CourseCommentRepository courseCommentRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
+
+    @Autowired
+    private CoursePublishRepository coursePublishRepository;
+
+    @Autowired
+    private CourseCatalogRepository courseCatalogRepository;
+
+    @Autowired
+    private ResourceRepository resourceRepository;
+
+    @Autowired
+    private ResourcePublishRepository resourcePublishRepository;
 
     /**
      * 新增课程评论service层
@@ -29,46 +50,59 @@ public class CourseWebServiceImpl implements CourseWebService {
      * @param courseForm
      * @return
      */
-  /*  @Override
+    @Override
     public CourseCommentEntity addCurriculumEvaluation(CourseForm courseForm) {
         CourseCommentEntity courseComment = new CourseCommentEntity();
-        courseComment.setCourseId(Long.parseLong(courseForm.getCourseId()));
+        courseComment.setCourseId(Long.parseLong(courseForm.getId()));
         courseComment.setScore(Long.parseLong(courseForm.getScore()));
         courseComment.setEvaluate(courseForm.getEvaluate());
-        return courseWebRepository.save(courseComment);
+        return courseCommentRepository.save(courseComment);
     }
 
     /**
      * 创建者id获取课程列表
-     *
-     * @param paseSize
-     * @param pageNo
+     * @param pageable
      * @param createrId
      * @return
-     * /
+     */
     @Override
-    public List<CourseEntity> findCourseAllByCreaterId(Integer paseSize, Integer pageNo, Long createrId) {
-        return courseWebRepository.findCourseAllByCreaterId(paseSize, pageNo, createrId);
-    }
-
-    /**
-     * 创建者id获取课程列表总数
-     *
-     * @param createrId
-     * @return
-     * /
-    @Override
-    public Integer findCourseAllNumbersByCreaterId(Long createrId) {
-        return courseWebRepository.findCourseAllNumbersByCreaterId(createrId);
+    public Page<CourseEntity> findCourseAllByCreaterId(Pageable pageable, Long createrId) {
+        Page<CourseEntity> page = courseRepository.findAll((Root<CourseEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) -> {
+            List<Predicate> predicates = new ArrayList<Predicate>();
+            predicates.add(cb.equal(root.get("creater_id").as(Long.class), createrId));
+            SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+            return query.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
+        }, pageable);
+        return page;
     }
 
     @Override
-    public List<CoursePublishEntity> findRecommendedCoursesAll(CourseForm courseForm) {
-        return courseWebRepository.findRecommendedCoursesAll(courseForm.getPageSize(), courseForm.getPageOn(), courseForm.getDirection(), courseForm.getCourseSort(), courseForm.getCourseType(), courseForm.getType());
+    public Page<CoursePublishEntity> findRecommendedCoursesAll(Pageable pageable, KeywordVO keywordVO) {
+        Page<CoursePublishEntity> page = coursePublishRepository.findAll((Root<CoursePublishEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) -> {
+            List<Predicate> predicates = new ArrayList<Predicate>();
+            if (null != keywordVO.getDirection() && !"".equals(keywordVO.getDirection())) {
+                predicates.add(cb.equal(root.get("direction").as(Long.class), keywordVO.getDirection()));
+            }
+            if (null != keywordVO.getCourseSort() && !"".equals(keywordVO.getCourseSort())) {
+                predicates.add(cb.like(root.get("frameId").as(String.class), "%" + keywordVO.getCourseSort() + "%"));
+            }
+            if (null != keywordVO.getCourseType() && !"".equals(keywordVO.getCourseType())) {//少一个课程类型
+                predicates.add(cb.equal(root.get("fee").as(Long.class), keywordVO.getCourseType()));
+            }
+            SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+            return query.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
+        }, pageable);
+        return page;
     }
 
     @Override
-    public Integer findRecommendedCoursesAllNumbers(CourseForm courseForm) {
-        return courseWebRepository.findRecommendedCoursesAllNumbers(courseForm.getDirection(), courseForm.getCourseSort(), courseForm.getCourseType(), courseForm.getType());
-    }*/
+    public List<CourseCatalogEntity> findCourseCatalogAll(Long id) {
+        List<CourseCatalogEntity> courseCatalog = courseCatalogRepository.findAll();
+        return courseCatalog;
+    }
+
+    @Override
+    public ResourcePublishEntity findResourcePublishById(Long id) {
+        return resourcePublishRepository.getOne(id);
+    }
 }
