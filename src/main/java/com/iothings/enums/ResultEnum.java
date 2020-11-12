@@ -9,6 +9,8 @@ import lombok.Getter;
  */
 @Getter
 public enum ResultEnum {
+    EDFAULT_PARAMETERS_ONE_SUCCES(1,"默认参数1"),
+    EDFAULT_PARAMETERS_ZERO_SUCCES(0,"默认参数0"),
     ADD_SUCCES(1,"添加成功"),
     ADD_ERROR(-1,"添加失败"),
     EDIT_SUCCES(1,"修改成功"),

@@ -1,6 +1,9 @@
 package com.iothings.service;
 
+import com.iothings.entity.Business;
 import com.iothings.entity.Seniority;
+import com.iothings.form.BusinessForm;
+import com.iothings.form.SeniorityForm;
 
 import java.util.List;
 
@@ -11,7 +14,9 @@ import java.util.List;
  */
 
 public interface SeniorityService {
-    Seniority save(Seniority Seniority);
+    Seniority save(Seniority seniority);
+
+    Seniority edit(SeniorityForm seniorityForm);
 
     public List<Seniority> getTree(Integer status);
 
@@ -19,5 +24,7 @@ public interface SeniorityService {
 
     public void delete(Integer id);
 
-    public Integer updataByid(Integer id,Integer pid,Integer sort);
+    public Seniority updataByid(Integer id,Integer pid,Integer sort);
+
+    public boolean existsById(Integer id);
 }

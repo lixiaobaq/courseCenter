@@ -1,17 +1,20 @@
 package com.iothings.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.iothings.VO.BusinessVO;
 import com.iothings.VO.ResultVO;
 import com.iothings.VO.SeniorityVO;
 import com.iothings.entity.Business;
 import com.iothings.entity.Seniority;
 import com.iothings.enums.ResultEnum;
+import com.iothings.form.BusinessForm;
+import com.iothings.form.SeniorityForm;
 import com.iothings.service.impl.SeniorityServiceImpl;
+import com.iothings.util.ResultVOUtil;
+import com.iothings.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import util.ResultVOUtil;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,31 +43,30 @@ public class SeniorityController {
         }
     }
     @PostMapping("add")
-    public ResultVO add(@RequestParam("name")String name, @RequestParam("Level")String Level, @RequestParam("Parentid")String Parentid, @RequestParam("Sort")String Sort){
+    public ResultVO add(@RequestParam("name")String name,@RequestParam("parent_id")String parentId){
         try {
+            if(StringUtil.isNotEmpty(name) || StringUtil.isNotEmpty(parentId)){
             Seniority seniority= new Seniority();
             seniority.setName(name);
-            seniority.setLevel(Integer.parseInt(Level));
-            seniority.setParentid(Integer.parseInt(Parentid));
+            seniority.setParentId(Integer.parseInt(parentId));
             seniority.setStatus(ResultEnum.STATUS_TYPE_DOWN.getCode());
-            seniority.setSort(Sort);
-            Seniority seniority1=service.save(seniority);
-            System.out.println(JSONObject.toJSONString(seniority1));
-            return ResultVOUtil.success(seniority1.getId());
+            seniority.setSort(ResultEnum.STATUS_TYPE_DOWN.getCode().toString());
+            seniority=service.save(seniority);
+            System.out.println(JSONObject.toJSONString(seniority));
+            return ResultVOUtil.success(seniority.getId());
+            }else{
+                return ResultVOUtil.success(ResultEnum.PARAM_ERROR.getMessage());
+            }
         }catch (Exception e){
             e.printStackTrace();
             return ResultVOUtil.success(ResultEnum.ADD_ERROR.getMessage());
         }
     }
     @PostMapping("edit")
-    public ResultVO edit(@RequestParam("id")String id,@RequestParam("name")String name,@RequestParam("releas_status")String releas_status){
+    public ResultVO edit(@Valid SeniorityForm seniorityForm){
         try {
-            Seniority seniority= new Seniority();
-            seniority.setId(Long.valueOf(id));
-            seniority.setName(name);
-            seniority.setStatus(Integer.parseInt(releas_status));
-            Seniority seniority2=service.save(seniority);
-            System.out.println(JSONObject.toJSONString(seniority2));
+            Seniority seniority = service.edit(seniorityForm);
+            System.out.println(JSONObject.toJSONString(seniority));
             return ResultVOUtil.success(ResultEnum.EDIT_SUCCES.getMessage());
         }catch (Exception e){
             e.printStackTrace();
@@ -83,10 +85,10 @@ public class SeniorityController {
         }
     }
     @PostMapping("sort")
-    public ResultVO sort(@RequestParam("id")Integer id,@RequestParam("parentId")Integer parentId,@RequestParam("sort")Integer sort){
+    public ResultVO sort(@RequestParam("id")String id,@RequestParam("parentId")String parentId,@RequestParam("sort")String sort){
         try {
-            Integer courseFrame= service.updataByid(id,parentId,sort);
-            return ResultVOUtil.success(courseFrame);
+            Seniority seniority= service.updataByid(Integer.parseInt(id),Integer.parseInt(parentId),Integer.parseInt(sort));
+            return ResultVOUtil.success(seniority);
         }catch (Exception e){
             e.printStackTrace();
             return ResultVOUtil.success(ResultEnum.MANAGER_ERROR.getMessage());

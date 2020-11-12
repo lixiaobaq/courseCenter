@@ -1,17 +1,16 @@
 package com.iothings.form;
 
-
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 /**
  * @author: Alex
- * @time:2020/11/03 10:36 AM
- * @Description：
+ * @time:2020/11/11 11:16
+ * @Description
  */
 @Data
-@ApiModel(value = "CourseFrameForm", description = "课程分类Form")
-public class CourseFrameForm {
+@ApiModel(value = "SeniorityForm", description = "资历分类Form")
+public class SeniorityForm {
     private Long id;
     private String name;
     private String sort;

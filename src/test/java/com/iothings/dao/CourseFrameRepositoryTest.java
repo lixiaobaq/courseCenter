@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,24 +23,22 @@ public class CourseFrameRepositoryTest {
 
 
     @Test
-//    @Transactional
+    @Transactional
     public void saveTest(){
         CourseFrame courseFrame=new CourseFrame();
         courseFrame.setLevel(1);
         courseFrame.setName("中文不好使？");
-        courseFrame.setParentid(0);
+        courseFrame.setParentId(0);
         courseFrame.setStatus(0);
-        courseFrame.setCoursenum(1);
-        courseFrameRepository.save(courseFrame);
+        courseFrame.setSort("1");
+        courseFrame.setIsOpen("0");
+        courseFrame= courseFrameRepository.save(courseFrame);
+        System.out.println(JSONObject.toJSONString(courseFrame));
+        Assert.assertNotNull(courseFrame);
     }
     @Test
-    public void getListCourseFrame(){
-        List<CourseFrame> courseFrame= courseFrameRepository.findByIdss(2l);
-        System.out.println("lieb:"+JSONObject.toJSONString(courseFrame));
-    }
-    @Test
-    public void findBypid(){
-        List<CourseFrame> courseFrame=courseFrameRepository.findByParentid(1);
+    public void findByParentId(){
+        List<CourseFrame> courseFrame=courseFrameRepository.findByParentId(1);
         System.out.println("lieb:"+JSONObject.toJSONString(courseFrame));
         Assert.assertNotEquals(0,courseFrame.size());
     }
@@ -49,16 +48,10 @@ public class CourseFrameRepositoryTest {
         System.out.println("lieb:"+JSONObject.toJSONString(courseFrame));
         Assert.assertNotEquals(0,courseFrame.size());
     }
-
     @Test
-    public void findCourseNumByFrame(){
-        Integer courseFrame=courseFrameRepository.findCourseNumByFrame(13);
-        System.out.println("lieb:"+courseFrame);
-    }
-
-    @Test
-    public void updataByid(){
-        Integer courseFrame1= courseFrameRepository.updataByid(1,10,5);
-        System.out.println("后:"+courseFrame1);
+    public void findByParentIdAndStatus(){
+        List<CourseFrame> courseFrame=courseFrameRepository.findByParentIdAndStatus(0,2);
+        System.out.println("lieb:"+JSONObject.toJSONString(courseFrame));
+        Assert.assertNotEquals(0,courseFrame.size());
     }
 }
