@@ -41,7 +41,12 @@ public class SeniorityServiceImpl implements SeniorityService {
 
     @Override
     public List<Seniority> getTree(Integer status) {
-        List<Seniority> CourseFrameList=repository.findByStatus(status);
+        List<Seniority> CourseFrameList=new ArrayList<Seniority>();
+        if(status!=-1){
+            CourseFrameList=repository.findByStatus(status);
+        }else{
+            CourseFrameList=repository.findAll();
+        }
         List<Seniority> CourseFrameList1=new ArrayList<Seniority>();
         for (Seniority business:CourseFrameList) {
             if(business.getParentId()==0){

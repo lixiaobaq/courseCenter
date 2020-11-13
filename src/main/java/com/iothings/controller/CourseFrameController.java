@@ -25,13 +25,13 @@ import java.util.List;
  * @Description：
  */
 @RestController
-@RequestMapping("/api/style/")
+@RequestMapping("/api")
 public class CourseFrameController {
 
     @Autowired
     private CourseFrameServiceImpl courseFrameService;
 
-    @GetMapping("list")
+    @GetMapping("/style/list")
     public ResultVO list(){
         try {
             CourseFrameVO courseFrameVO=new CourseFrameVO();
@@ -45,7 +45,34 @@ public class CourseFrameController {
         }
     }
 
-    @PostMapping("add")
+    @GetMapping("/style/release_list")
+    public ResultVO releaseList(){
+        try {
+            CourseFrameVO courseFrameVO=new CourseFrameVO();
+            List<CourseFrame> courseFramelist=courseFrameService.getTree(ResultEnum.ALL_TYPE.getCode());
+            courseFrameVO.setList(courseFramelist);
+            System.out.println(JSONObject.toJSONString(courseFrameVO));
+            return ResultVOUtil.success(Arrays.asList(courseFrameVO));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultVOUtil.success(ResultEnum.MANAGER_ERROR.getMessage());
+        }
+    }
+    @GetMapping("/getCourseClassification")
+    public ResultWebVO getCourseClassification(){
+        try {
+            CourseFrameVO courseFrameVO=new CourseFrameVO();
+            List<CourseFrame> courseFramelist=courseFrameService.getTree(ResultEnum.STATUS_TYPE_UP.getCode());
+            courseFrameVO.setList(courseFramelist);
+            System.out.println(JSONObject.toJSONString(courseFrameVO));
+            return ResultWebVOUtil.success(Arrays.asList(courseFrameVO));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultWebVOUtil.success(ResultEnum.MANAGER_ERROR.getMessage());
+        }
+    }
+
+    @PostMapping("/style/add")
     public ResultVO add(@RequestParam("name")String name,@RequestParam("parent_id")String parentId){
         try {
             //判断参数是否为空
@@ -66,7 +93,7 @@ public class CourseFrameController {
             return ResultVOUtil.success(ResultEnum.MANAGER_ERROR.getMessage());
         }
     }
-    @PostMapping("edit")
+    @PostMapping("/style/edit")
     public ResultVO edit(@Valid CourseFrameForm courseFrameForm){
         try {
             CourseFrame CourseFrame2=courseFrameService.edit(courseFrameForm);
@@ -78,7 +105,7 @@ public class CourseFrameController {
         }
     }
 
-    @PostMapping("delete")
+    @PostMapping("/style/delete")
     public ResultVO edit(@RequestParam("id")String id){
         ResultVO resultVO = new ResultVO();
         if(StringUtil.isNotEmpty(id)){
@@ -95,7 +122,7 @@ public class CourseFrameController {
         return resultVO;
     }
 
-    @PostMapping("sort")
+    @PostMapping("/style/sort")
     public ResultVO sort(@RequestParam("id")String id,@RequestParam("parentId")String parentId,@RequestParam("sort")String sort){
         try {
             //判断参数是否为空

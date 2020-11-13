@@ -25,13 +25,13 @@ import java.util.List;
  * @Description
  */
 @RestController
-@RequestMapping("/api/business/")
+@RequestMapping("/api")
 public class BusinessController {
     @Autowired
     private BusinessServiceImpl service;
 
-    @GetMapping("/list")
-    public ResultVO list(){
+    @GetMapping("/getBusinessList")
+    public ResultVO getBusinessList(){
         try {
             BusinessVO businessVO=new BusinessVO();
             List<Business> courseFramelist=service.getTree(ResultEnum.STATUS_TYPE_UP.getCode());
@@ -43,7 +43,20 @@ public class BusinessController {
             return ResultVOUtil.success(ResultEnum.MANAGER_ERROR.getMessage());
         }
     }
-    @PostMapping("add")
+    @GetMapping("/getBusinessList2")
+    public ResultVO getBusinessList2(){
+        try {
+            BusinessVO businessVO=new BusinessVO();
+            List<Business> courseFramelist=service.getTree(ResultEnum.ALL_TYPE.getCode());
+            businessVO.setList(courseFramelist);
+            System.out.println(JSONObject.toJSONString(businessVO));
+            return ResultVOUtil.success(Arrays.asList(businessVO));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultVOUtil.success(ResultEnum.MANAGER_ERROR.getMessage());
+        }
+    }
+    @PostMapping("/saveBusiness")
     public ResultVO add(@RequestParam("name")String name,@RequestParam("parent_id")String parentId){
         try {
             //判断参数是否为空
@@ -64,7 +77,7 @@ public class BusinessController {
             return ResultVOUtil.success(ResultEnum.MANAGER_ERROR.getMessage());
         }
     }
-    @PostMapping("edit")
+    @PostMapping("/editBusiness")
     public ResultVO edit(@Valid BusinessForm businessForm){
         try {
             Business business = service.edit(businessForm);
@@ -76,7 +89,7 @@ public class BusinessController {
         }
     }
 
-    @PostMapping("delete")
+    @PostMapping("/deleteBusiness")
     public ResultVO edit(@RequestParam("id")String id){
         ResultVO resultVO = new ResultVO();
         if(StringUtil.isNotEmpty(id)){
@@ -92,7 +105,7 @@ public class BusinessController {
         }
         return resultVO;
     }
-    @PostMapping("sort")
+    @PostMapping("/sortBusiness")
     public ResultVO sort(@RequestParam("id")String id,@RequestParam("parentId")String parentId,@RequestParam("sort")String sort){
         try {
             //判断参数是否为空

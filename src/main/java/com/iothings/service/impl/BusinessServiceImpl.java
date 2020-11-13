@@ -40,7 +40,12 @@ public class BusinessServiceImpl implements BusinessService {
 
     @Override
     public List<Business> getTree(Integer status) {
-        List<Business> CourseFrameList=repository.findByStatus(status);
+        List<Business> CourseFrameList=new ArrayList<Business>();
+        if(status!=-1){
+            CourseFrameList=repository.findByStatus(status);
+        }else{
+            CourseFrameList=repository.findAll();
+        }
         List<Business> CourseFrameList1=new ArrayList<Business>();
         for (Business business:CourseFrameList) {
             if(business.getParentId()==0){

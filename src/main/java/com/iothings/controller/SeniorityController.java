@@ -42,6 +42,19 @@ public class SeniorityController {
             return ResultVOUtil.success(ResultEnum.MANAGER_ERROR.getMessage());
         }
     }
+    @GetMapping("/release_list")
+    public ResultVO releaselist(){
+        try {
+            SeniorityVO seniorityVO=new SeniorityVO();
+            List<Seniority> courseFramelist=service.getTree(ResultEnum.ALL_TYPE.getCode());
+            seniorityVO.setList(courseFramelist);
+            System.out.println(JSONObject.toJSONString(seniorityVO));
+            return ResultVOUtil.success(Arrays.asList(seniorityVO));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultVOUtil.success(ResultEnum.MANAGER_ERROR.getMessage());
+        }
+    }
     @PostMapping("add")
     public ResultVO add(@RequestParam("name")String name,@RequestParam("parent_id")String parentId){
         try {

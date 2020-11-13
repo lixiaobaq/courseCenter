@@ -67,7 +67,12 @@ public class CourseFrameServiceImpl implements CourseFrameService {
      */
     @Override
     public List<CourseFrame> getTree(Integer status){
-        List<CourseFrame> CourseFrameList=repository.findByStatus(status);
+        List<CourseFrame> CourseFrameList=new ArrayList<CourseFrame>();
+        if(status!=-1){
+            CourseFrameList=repository.findByStatus(status);
+        }else{
+            CourseFrameList=repository.findAll();
+        }
         List<CourseFrame> CourseFrameList1=new ArrayList<CourseFrame>();
         for (CourseFrame CourseFrame:CourseFrameList) {
             if(CourseFrame.getParentId()==0){
