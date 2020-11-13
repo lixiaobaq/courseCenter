@@ -14,5 +14,33 @@ import java.util.List;
  */
 public interface CertificationCenterService {
 
+        /**
+         * 列表
+         * @return
+         */
         List<CertificationCenterDTO> findPopularCertificates();
+
+        /**
+         *  用Specification作的多表查询，但未出来，暂时弃用
+         * @return
+         */
+        List<CertificationCenterEntity> findCertificates();
+
+        /**
+         * 添加
+         * @param certificationCenterEntity
+         * @return
+         */
+        CertificationCenterEntity save(CertificationCenterEntity certificationCenterEntity);
+
+
+        /**
+         * 删除
+         * @param id
+         */
+        void delete(Integer id);
+
+
+        boolean existsById(Integer id);
+
 }

@@ -1,8 +1,10 @@
 package com.iothings.entity;
 
-import lombok.Data;
+import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * @Package： com.iothings.entity
@@ -13,7 +15,11 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "authority")
-@Data
+//@Data
+@Getter
+@Setter
+
+@EntityListeners(AuditingEntityListener.class)
 public class CertificateAuthorityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +28,8 @@ public class CertificateAuthorityEntity {
     private String title;
     @Column(nullable = true, columnDefinition = "varchar(100) COMMENT '地点'")
     private String position;
+
+    @OneToMany(mappedBy="certificateAuthorityEntity",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    private Set<CertificationCenterEntity> certifications ;
 
 }

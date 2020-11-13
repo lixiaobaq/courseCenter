@@ -22,5 +22,8 @@ public interface UserCertificationService {
          * @return
          */
         Page<UserCertificationEntity> findAll(UserCertificationEntity userCertificationEntity, Pageable pageable);
+        
+        
+        
 
 }
